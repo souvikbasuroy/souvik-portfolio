@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 const TOTAL_FOLDERS = 7;
-const FRAMES_PER_FOLDER = 192;
 const FRAME_EXT = 'jpg';
 const BASE_PATH = '/souvik-portfolio/';
+
+const getFramesCount = (folderNum) => (folderNum === 1 ? 121 : 192);
 
 const GlobalCanvas = ({ scrollVH, timeline, onProgress, onLoaded, onSectionFrameReady }) => {
   const canvasRef = useRef(null);
@@ -27,13 +28,14 @@ const GlobalCanvas = ({ scrollVH, timeline, onProgress, onLoaded, onSectionFrame
     frameCache.current[folderNum] = frameCache.current[folderNum] || {};
     let loadedCount = 0;
     
+    const framesCount = getFramesCount(folderNum);
     const step = isMobile.current ? 2 : 1;
     const framesToLoad = [];
-    for (let i = 1; i <= FRAMES_PER_FOLDER; i += step) {
+    for (let i = 1; i <= framesCount; i += step) {
       framesToLoad.push(i);
     }
-    if (framesToLoad[framesToLoad.length - 1] !== FRAMES_PER_FOLDER) {
-      framesToLoad.push(FRAMES_PER_FOLDER);
+    if (framesToLoad[framesToLoad.length - 1] !== framesCount) {
+      framesToLoad.push(framesCount);
     }
 
     const totalToLoad = framesToLoad.length;
@@ -134,17 +136,18 @@ const GlobalCanvas = ({ scrollVH, timeline, onProgress, onLoaded, onSectionFrame
       const progress = Math.min(1, Math.max(0,
         (svh - seg.startVH) / (seg.endVH - seg.startVH)
       ));
-      let rawFrame = Math.floor(progress * (FRAMES_PER_FOLDER - 1)) + 1;
+      const framesCount = getFramesCount(folder);
+      let rawFrame = Math.floor(progress * (framesCount - 1)) + 1;
       if (isMobile.current) {
-        rawFrame = rawFrame < FRAMES_PER_FOLDER ? Math.floor((rawFrame - 1) / 2) * 2 + 1 : FRAMES_PER_FOLDER;
+        rawFrame = rawFrame < framesCount ? Math.floor((rawFrame - 1) / 2) * 2 + 1 : framesCount;
       }
-      frameNum = Math.max(1, Math.min(FRAMES_PER_FOLDER, rawFrame));
+      frameNum = Math.max(1, Math.min(framesCount, rawFrame));
       if (progress > 0.4 && folder < TOTAL_FOLDERS) preloadFolder(folder + 1);
     } else {
       const prevVideoSeg = [...timeline].reverse().find(s => s.type === 'video' && s.endVH <= seg.startVH);
       if (prevVideoSeg) {
         folder = prevVideoSeg.videoIdx + 1;
-        frameNum = FRAMES_PER_FOLDER;
+        frameNum = getFramesCount(folder);
       } else {
         folder = 1;
         frameNum = 1;
