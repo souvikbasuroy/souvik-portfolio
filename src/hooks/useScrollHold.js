@@ -121,5 +121,12 @@ export const useScrollHold = (holdPoints, { sensitivity = 120, lerpSpeed = 0.08,
     return () => cancelAnimationFrame(rafRef.current);
   }, [lerpSpeed]);
 
-  return { currentVH, isHeld, activeHoldPoint };
+  const scrollToVH = useCallback((vh) => {
+    scrollPos.current = Math.max(0, Math.min(totalVH, vh));
+    accumulatedDelta.current = 0;
+    setIsHeld(false);
+    setActiveHoldPoint(null);
+  }, [totalVH]);
+
+  return { currentVH, isHeld, activeHoldPoint, scrollToVH };
 };

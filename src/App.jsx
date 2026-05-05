@@ -53,7 +53,7 @@ const App = () => {
   const totalVH = timeline[timeline.length - 1].endVH;
 
   // Custom Scroll with Hold Points
-  const { currentVH, isHeld } = useScrollHold(holdPoints, {
+  const { currentVH, isHeld, scrollToVH } = useScrollHold(holdPoints, {
     sensitivity: 140,
     lerpSpeed: 0.08,
     totalVH: totalVH
@@ -102,7 +102,13 @@ const App = () => {
       <AnimatePresence>
         {userStarted && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-            <Navigation scrollVH={currentVH} totalVH={totalVH} currentSectionIdx={currentSectionIdx} sections={SECTIONS} />
+            <Navigation 
+              scrollVH={currentVH} 
+              totalVH={totalVH} 
+              currentSectionIdx={currentSectionIdx} 
+              sections={SECTIONS} 
+              scrollToVH={scrollToVH} 
+            />
             
             <AnimatePresence mode="wait">
               {currentSectionIdx !== -1 && (confirmedSectionId === SECTIONS[currentSectionIdx].id || isHeld) && (
@@ -115,7 +121,7 @@ const App = () => {
                   className="section-overlay active"
                   style={{ zIndex: 10 }}
                 >
-                  {currentSectionIdx === 0 && <About />}
+                  {currentSectionIdx === 0 && <About scrollToVH={scrollToVH} />}
                   {currentSectionIdx === 1 && <Projects />}
                   {currentSectionIdx === 2 && <Education />}
                   {currentSectionIdx === 3 && <Skills />}

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const Navigation = ({ scrollVH, totalVH, currentSectionIdx, sections }) => {
+const Navigation = ({ scrollVH, totalVH, currentSectionIdx, sections, scrollToVH }) => {
   const progress = (scrollVH / totalVH) * 100;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (idx) => {
+    // Each section is separated by a video. 
+    // Section 0 is at 0 VH.
+    // Video 0 starts at 200 VH.
+    // Section 1 starts at 400 VH.
+    // Calculation: idx * (SEC_H + VID_H) = idx * (200 + 200) = idx * 400.
     const targetVH = idx * 400;
-    window.scrollTo({
-      top: (targetVH / 100) * window.innerHeight,
-      behavior: 'smooth'
-    });
+    scrollToVH(targetVH);
     setIsMenuOpen(false);
   };
 
@@ -23,7 +25,7 @@ const Navigation = ({ scrollVH, totalVH, currentSectionIdx, sections }) => {
         padding: '0 6vw', background: 'transparent',
         backdropFilter: 'blur(8px)', borderBottom: '1px solid rgba(255,255,255,0.03)', transition: 'all 0.4s ease'
       }}>
-        <div className="nav-logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div className="nav-logo" onClick={() => scrollToVH(0)}>
           SOUVIK BASU ROY
         </div>
 

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 
-const About = () => {
+const About = ({ scrollToVH }) => {
   const scrollToConnect = () => {
+    // The 'Connect' section is the last one (index 7).
+    // Calculation: 7 * 400 = 2800 VH.
     const targetVH = 7 * 400;
-    window.scrollTo({
-      top: (targetVH / 100) * window.innerHeight,
-      behavior: 'smooth'
-    });
+    scrollToVH(targetVH);
   };
 
   return (
