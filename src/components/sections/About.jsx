@@ -3,11 +3,9 @@ import { motion, useAnimation } from 'framer-motion';
 
 const About = () => {
   const scrollToConnect = () => {
-    // Connect is section index 7
-    // Each cycle is 100vh section + 150vh video = 250vh
-    const vh = 7 * (100 + 150);
+    const targetVH = 7 * 400;
     window.scrollTo({
-      top: (vh / 100) * window.innerHeight,
+      top: (targetVH / 100) * window.innerHeight,
       behavior: 'smooth'
     });
   };
@@ -52,14 +50,14 @@ const About = () => {
               style={{ position: 'relative', zIndex: 1 }}
             >
               <div className="profile-frame" style={{
-                width: '280px',
-                height: '285px',
+                width: '220px',
+                height: '225px',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 position: 'relative',
                 boxShadow: '0 20px 50px rgba(0,0,0,0.5), 0 0 40px var(--accent-glow)',
-                border: '3px solid var(--accent)',
-                padding: '5px',
+                border: '2px solid var(--accent)',
+                padding: '4px',
                 background: 'var(--bg-dark)'
               }}>
                 <div style={{
@@ -105,17 +103,17 @@ const About = () => {
         </div>
 
         {/* Right Column: Content */}
-        <div className="about-right" style={{ paddingTop: '2rem' }}>
-          <div className="about-bio" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p className="body-text" style={{ fontSize: '1.2rem', color: 'var(--text-bright)', lineHeight: '1.8', fontWeight: 500 }}>
+        <div className="about-right" style={{ paddingTop: '0' }}>
+          <div className="about-bio" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <p className="body-text" style={{ fontSize: '1rem', color: 'var(--text-bright)', lineHeight: '1.6', fontWeight: 500 }}>
               I am an aspiring <span className="accent-text" style={{ color: 'var(--accent-secondary)' }}>Data Analyst and Web Developer</span> with a strong passion for building intelligent, user-focused digital solutions.
             </p>
 
-            <p className="body-text" style={{ opacity: 0.9, fontSize: '1rem' }}>
+            <p className="body-text" style={{ opacity: 0.9, fontSize: '0.9rem', lineHeight: '1.5' }}>
               My work revolves around transforming complex data into actionable insights while crafting seamless, visually compelling web experiences. I specialize in bridging the gap between data and design—combining analytical thinking with creative problem-solving.
             </p>
 
-            <p className="body-text" style={{ opacity: 0.8, fontSize: '0.95rem' }}>
+            <p className="body-text" style={{ opacity: 0.8, fontSize: '0.85rem', lineHeight: '1.5' }}>
               Currently, as a student at <span style={{ color: 'var(--accent)' }}>IEM</span>, I am continuously expanding my skill set by building real-world projects and deepening my understanding of AI and data-driven systems.
             </p>
 
@@ -128,20 +126,20 @@ const About = () => {
               ))}
             </div>
 
-            <div className="about-actions" style={{ display: 'flex', gap: '1.5rem', marginTop: '2.5rem' }}>
+            <div className="about-actions" style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
               <a href="./Souvik Basu Roy CV (1).pdf" className="btn-resume" style={{
                 background: 'linear-gradient(135deg, var(--accent) 0%, #f5d878 100%)',
-                color: '#000', padding: '14px 36px', borderRadius: '10px', fontWeight: 900,
-                textDecoration: 'none', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.2em',
+                color: '#000', padding: '12px 28px', borderRadius: '8px', fontWeight: 900,
+                textDecoration: 'none', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em',
                 boxShadow: '0 10px 30px var(--accent-glow)', transition: 'transform 0.3s'
               }}>Download CV</a>
               <button
                 onClick={scrollToConnect}
                 className="btn-contact glass"
                 style={{
-                  color: 'var(--text-bright)', padding: '14px 36px', borderRadius: '10px', fontWeight: 700,
+                  color: 'var(--text-bright)', padding: '12px 28px', borderRadius: '8px', fontWeight: 700,
                   cursor: 'pointer', border: '1px solid var(--glass-border)', background: 'transparent',
-                  fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.2em', transition: 'all 0.3s'
+                  fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.15em', transition: 'all 0.3s'
                 }}
               >
                 Contact Me

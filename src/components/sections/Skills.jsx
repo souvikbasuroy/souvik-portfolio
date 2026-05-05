@@ -73,16 +73,17 @@ const Skills = () => {
 
       <div className="treasury">
         {SKILL_GROUPS.map((group, gIdx) => (
-          <div key={group.label} className="treasury-group">
+          <div key={group.label} className="treasury-group" style={{ marginBottom: '1.5rem' }}>
             <motion.div
               className="treasury-group-label"
+              style={{ marginBottom: '1rem', fontSize: '0.6rem' }}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               {group.label}
             </motion.div>
-            <div className="coins-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '2.5rem' }}>
+            <div className="coins-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
               {group.skills.map((skill, sIdx) => (
                 <SkillCoin
                   key={skill.name}

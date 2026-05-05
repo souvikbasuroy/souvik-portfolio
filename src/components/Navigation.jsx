@@ -7,19 +7,12 @@ const Navigation = ({ scrollVH, totalVH, currentSectionIdx, sections }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (idx) => {
-    // Each section is at (idx * (SEC_H + VID_H)) vh
-    // But wait, the timeline calculation in App.jsx is slightly different.
-    // SEC_H = 100, VID_H = 150
-    // S0: 0-100
-    // V0: 100-250
-    // S1: 250-350
-    // V1: 350-500
-    const vh = idx * (100 + 150);
+    const targetVH = idx * 400;
     window.scrollTo({
-      top: (vh / 100) * window.innerHeight,
+      top: (targetVH / 100) * window.innerHeight,
       behavior: 'smooth'
     });
-    setIsMenuOpen(false); // Close menu on click
+    setIsMenuOpen(false);
   };
 
   return (
